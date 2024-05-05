@@ -9,4 +9,4 @@ COPY *.py /app/
 COPY entrypoint.sh /app
 RUN chmod +x /app/entrypoint.sh
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["python3 01_sentiment_analysis.py"]
