@@ -7,4 +7,4 @@ RUN python -m spacy download en_core_web_sm
 
 COPY *.py /app/
 
-ENTRYPOINT ["python3", "01_sentiment_analysis.py"]
+ENTRYPOINT ["gunicorn", "-b", ":5000", "01_sentiment_analysis:app"]
