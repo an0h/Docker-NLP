@@ -7,4 +7,4 @@ RUN python -m spacy download en_core_web_sm
 
 COPY *.py /app/
 
-ENTRYPOINT ["python3 01_sentiment_analysis.py"]
+ENTRYPOINT ["python3 /app/01_sentiment_analysis.py"]
