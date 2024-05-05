@@ -1,3 +1,4 @@
+from flask import Flask, request, jsonify
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 import ssl
@@ -8,7 +9,7 @@ except AttributeError:
     pass
 else:
     ssl._create_default_https_context = _create_unverified_https_context
-nltk.download('vader_lexicon') 
+nltk.download('vader_lexicon')
 nltk.download('punkt')
 
 def perform_semantic_analysis(text):
@@ -22,13 +23,18 @@ def perform_semantic_analysis(text):
     else:
         return "Neutral"
 
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def home():
+    content = request.json.get('content', None)
+    if content is None:
+        return jsonify({"error": "No content provided"}), 400
+
+    result = perform_semantic_analysis(content)
+    return jsonify({"Sentiment": result})
+
+
 if __name__ == "__main__":
-    while True:
-        input_text = input("Enter the text for semantic analysis (type 'exit' to end): ")
+    app.run(debug=True)
 
-        if input_text.lower() == 'exit':
-            print("Exiting...")
-            break
-
-        result = perform_semantic_analysis(input_text)
-        print(f"Sentiment: {result}")
