@@ -27,7 +27,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def get():
-    return jsonify({"Hello World"})
+    return jsonify({"status": "ok"})
 
 @app.route('/', methods=['POST'])
 def post():
