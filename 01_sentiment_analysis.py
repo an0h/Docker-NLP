@@ -25,8 +25,12 @@ def perform_semantic_analysis(text):
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def get():
+    return jsonify({"Hello World"})
+
 @app.route('/', methods=['POST'])
-def home():
+def post():
     content = request.json.get('content', None)
     if content is None:
         return jsonify({"error": "No content provided"}), 400
